@@ -1,0 +1,9 @@
+[RB Plugin]
+Loader=python
+Module=EarPhone
+IAge=1
+Name=Earphone Accident
+Description=Just relax while earphone got unpluged by accident.
+Authors=Meng Zhuo
+Copyright=Apache V2.0-2011-Meng Zhuo 
+Website=http://mengzhuo.org/lab/EP4Rhythmbox/
