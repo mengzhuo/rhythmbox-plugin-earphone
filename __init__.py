@@ -12,7 +12,7 @@ class EarPhone (rb.Plugin):
         dbus_loop = DBusGMainLoop()
         self.shell = shell
         self.system_bus = dbus.SystemBus(mainloop=dbus_loop)
-        self.system_bus.add_signal_receiver(self.EarphoneChange, dbus_interface = "org.freedesktop.Hal.Device", signal_name = "Condition")
+        self.system_bus.add_signal_receiver(self.EarPhoneChange, dbus_interface = "org.freedesktop.Hal.Device", signal_name = "Condition")
         
     def deactivate(self, shell):
         print "Earphone Event Plugin Deactivating..."
@@ -22,4 +22,4 @@ class EarPhone (rb.Plugin):
     
         #FIXME it's wired that str.find return a FALSE
         if not cond_details.find('headphone_insert'):
-            self.shell.props.shell_player.playpause()
+            self.shell.props.shell_player.playpause(0)
