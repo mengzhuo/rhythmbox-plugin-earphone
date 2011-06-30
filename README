@@ -1,0 +1,4 @@
+INSTALL
+1.unzip
+2.copy folder to ~/.gnome2/rhythmbox/plugins/
+3.restart the Rhythmbox
