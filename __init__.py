@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-import rb,dbus,gobject
+import rb,dbus,commands,pygtk,pynotify
+pygtk.require('2.0')
 from dbus.mainloop.glib import DBusGMainLoop
 
 
@@ -9,6 +10,13 @@ class EarPhone (rb.Plugin):
         
     def activate(self, shell):
         print "Earphone Event Plugin activated."
+        
+        #check whether HAL is running
+        HAL_id = commands.getoutput("pidof hald")
+        if not HAL_id.isdigit():
+            HAL_notify = pynotify.Notification("Rhythmbox Earphone Warning", "No HAL daemon running now")
+            HAL_notify.show()
+            
         dbus_loop = DBusGMainLoop()
         self.shell = shell
         self.system_bus = dbus.SystemBus(mainloop=dbus_loop)
