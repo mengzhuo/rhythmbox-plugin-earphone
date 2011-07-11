@@ -6,6 +6,6 @@ Name=No More Earphone Accident
 Name[zh_CN]=耳机意外防止器
 Description=Just relax while earphone got unpluged by accident.
 Description[zh_CN]=耳机意外被拔出而尴尬的日子一去不复返。
-Authors=Meng Zhuo
+Authors=Meng Zhuo <mengzhuo1203@gmail.com>
 Copyright=2011 © Meng Zhuo
 Website=http://mengzhuo.org/lab/EP4Rhythmbox/
