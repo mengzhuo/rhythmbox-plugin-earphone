@@ -20,6 +20,7 @@ as the name is changed.
 import rb,dbus,commands
 from dbus.mainloop.glib import DBusGMainLoop
 from gtk import icon_theme_get_default
+from gtk.gdk import pixbuf_new_from_file as pnff
 
 
 class EarPhone (rb.Plugin):
@@ -28,14 +29,17 @@ class EarPhone (rb.Plugin):
         
     def activate(self, shell):
         print "Earphone Event Plugin activated."
+        self.shell = shell
         
         #get icons
         icon = icon_theme_get_default()
-        warning_icon = icon.lookup_icon("audio-input-microphone",48, 0)
-        self.warning_icon_url = warning_icon.get_filename()
+        warning_icon = icon.lookup_icon("dialog-warning",48, 0)
+        warning_icon_url = warning_icon.get_filename()
+        self.warning_img_buf = pnff(warning_icon_url)
         
         crying_icon = icon.lookup_icon("face-crying",48, 0)
         crying_icon_url = crying_icon.get_filename()
+        #crying_icon_img_buf = pnff(crying_icon_url)
         
         #init notify
         session_bus = dbus.SessionBus()
@@ -46,14 +50,18 @@ class EarPhone (rb.Plugin):
         HAL_id = commands.getoutput("pidof hald")
         
         #get Rhythmbox PID
-        self.rb_pid = commands.getoutput("pidof rhythmbox")
+        #self.rb_pid = commands.getoutput("pidof rhythmbox")
         
         if not HAL_id.isdigit():
             #do No HAL notify
-            self.notify_interface.Notify('rhythmbox',0,crying_icon_url,'Ow..No HAL daemon',"Rhythmbox won't respond while Earphone status got changed",'','',-1)
+          try:
+            self.notify_interface.Notify('rhythmbox',0,crying_icon_url,'Ow..No HAL daemon',"Rhythmbox won't respond while Earphone status got changed",'',{'x-canonical-append':'allowed'},-1)
+          except:
+            print "Can't notify the system"
+            #self.shell.notify_custom(2,'Ow..No HAL daemon',"Rhythmbox won't respond while Earphone status got changed",crying_icon_img_buf,False)
             
         dbus_loop = DBusGMainLoop()
-        self.shell = shell
+        
         self.system_bus = dbus.SystemBus(mainloop=dbus_loop)
         self.system_bus.add_signal_receiver(self.EarPhoneChange, dbus_interface = "org.freedesktop.Hal.Device", signal_name = "Condition")
         
@@ -66,8 +74,19 @@ class EarPhone (rb.Plugin):
         # it's wired that str.find return a FALSE while it find the string...
         if not cond_details.find('headphone_insert'):
             self.shell.props.shell_player.playpause(0)
+            '''
             warning_notify_hints={'urgency':2,
                           'category':'device',
-                          'desktop-entry':'rhythmbox'
+                          'desktop-entry':'rhythmbox',
+                          'x-canonical-append':'allowed'
                           }
+            self.notify_interface.CloseNotification
             self.notify_interface.Notify('rhythmbox',0,self.warning_icon_url,'Earphone status had been changed','','',warning_notify_hints,-1)
+            '''
+            try:
+               self.shell.notify_custom(2,'Earphone status had been changed','',self.warning_img_buf,False)
+            except:
+               try:
+                  self.shell.notify_custom(2,'Earphone status had been changed','',crying_icon_url,False)
+               except:
+                  print "Can't not notify"
