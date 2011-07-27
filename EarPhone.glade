@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<interface domain="rhythmbox-plugin-earphone">
+  <requires lib="gtk+" version="2.16"/>
+  <!-- interface-naming-policy project-wide -->
+  <object class="GtkDialog" id="EPDialog">
+    <property name="border_width">5</property>
+    <property name="title" translatable="yes">EarPhone Setting</property>
+    <property name="window_position">center</property>
+    <property name="default_width">305</property>
+    <property name="type_hint">dialog</property>
+    <property name="has_separator">False</property>
+    <child internal-child="vbox">
+      <object class="GtkVBox" id="dialog-vbox">
+        <property name="visible">True</property>
+        <property name="spacing">2</property>
+        <child>
+          <object class="GtkLabel" id="title">
+            <property name="visible">True</property>
+            <property name="tooltip_text" translatable="yes">EarPhone Setting</property>
+            <property name="xalign">0</property>
+            <property name="yalign">0</property>
+            <property name="label" translatable="yes">EarPhone Setting</property>
+            <property name="ellipsize">start</property>
+            <property name="single_line_mode">True</property>
+            <property name="track_visited_links">False</property>
+            <attributes>
+              <attribute name="weight" value="ultrabold"/>
+              <attribute name="gravity" value="east"/>
+              <attribute name="gravity-hint" value="natural"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="padding">10</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkCheckButton" id="showNotify">
+            <property name="label" translatable="yes">Show Notifications</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="tooltip_text" translatable="yes">Show Notifications if this is Checked</property>
+            <property name="draw_indicator">True</property>
+          </object>
+          <packing>
+            <property name="padding">10</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child internal-child="action_area">
+          <object class="GtkHButtonBox" id="dialog-action_exit">
+            <property name="visible">True</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="button1">
+                <property name="label">gtk-close</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="pack_type">end</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="0">button1</action-widget>
+    </action-widgets>
+  </object>
+  <object class="GtkAction" id="action1"/>
+</interface>

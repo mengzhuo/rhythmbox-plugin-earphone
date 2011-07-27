@@ -1,0 +1,35 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-07-27 22:45+0800\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Meng Zhuo <mengzhuo1203@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /home/meng/.gnome2/rhythmbox/plugins/EarPhone\n"
+
+#: /home/meng/.gnome2/rhythmbox/plugins/EarPhone/__init__.py:76
+msgid "Ow..No HAL daemon"
+msgstr "啊…没有发现HAL守护进程"
+
+#: /home/meng/.gnome2/rhythmbox/plugins/EarPhone/__init__.py:77
+msgid "Rhythmbox won`t respond while Earphone status got changed"
+msgstr "Rhythmbox不会对耳机拔插的事件做出任何反应"
+
+#: /home/meng/.gnome2/rhythmbox/plugins/EarPhone/__init__.py:129
+msgid "Earphone status had been changed"
+msgstr "耳机插孔状态已变化"
+
+msgid "EarPhone Setting"
+msgstr "耳机插件设置"
+
+msgid "Show Notifications"
+msgstr "使用气泡通知"
+
+msgid "Show Notifications if this is Checked"
+msgstr "勾选后将使用气泡通知"
+
