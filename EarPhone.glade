@@ -56,6 +56,24 @@
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
+              <object class="GtkLinkButton" id="feedback">
+                <property name="label" translatable="yes">FeedBack</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="has_tooltip">True</property>
+                <property name="tooltip_markup" translatable="yes">Just Tell me anything about this plugin.</property>
+                <property name="image">image1</property>
+                <property name="uri">mailto:mengzhuo1203@gmail.com?subject=Rhythmbox Earphone Plugin feedback</property>
+                <accelerator key="f" signal="clicked"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkButton" id="button1">
                 <property name="label">gtk-close</property>
                 <property name="visible">True</property>
@@ -66,7 +84,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">0</property>
+                <property name="position">1</property>
               </packing>
             </child>
           </object>
@@ -79,8 +97,14 @@
       </object>
     </child>
     <action-widgets>
+      <action-widget response="0">feedback</action-widget>
       <action-widget response="0">button1</action-widget>
     </action-widgets>
   </object>
   <object class="GtkAction" id="action1"/>
+  <object class="GtkImage" id="image1">
+    <property name="visible">True</property>
+    <property name="stock">gtk-goto-top</property>
+    <property name="icon-size">2</property>
+  </object>
 </interface>

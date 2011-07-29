@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #   Author:Meng Zhuo <mengzhuo1203@gmail.com>
-#   version 0.1.4
+#   version 0.1.6
 #   Release under WTFPL Version 2.0
 '''
 DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
@@ -16,20 +16,26 @@ as the name is changed.
 
   0. You just DO WHAT THE FUCK YOU WANT TO.
 '''
-#  FURTRUE
-#  1.maybe add i18n in next version
 
-import rb,dbus,commands,gconf,gtk,gettext
+import rb
+import dbus
+import commands
+import gconf
+import gtk
+import gettext
+
 from dbus.mainloop.glib import DBusGMainLoop
 from gtk import icon_theme_get_default
 from gtk.gdk import pixbuf_new_from_file as pnff
 
 
-#DEBUG
-#import traceback
+# DEBUG
+# import traceback
+# Global Var
 i18n_mo_name = 'rhythmbox-plugin-earphone'
 gettext.textdomain(i18n_mo_name)
 _ = gettext.gettext
+version = "0.1.6"
 
 
 class EarPhone (rb.Plugin):
@@ -69,7 +75,8 @@ class EarPhone (rb.Plugin):
         
         #init notify
         session_bus = dbus.SessionBus()
-        notify_obj = session_bus.get_object('org.freedesktop.Notifications','/org/freedesktop/Notifications')
+        notify_obj = session_bus.get_object('org.freedesktop.Notifications',
+                                            '/org/freedesktop/Notifications')
         self.notify_interface = dbus.Interface(notify_obj,'org.freedesktop.Notifications')
         
         #check whether HAL is running
@@ -83,7 +90,9 @@ class EarPhone (rb.Plugin):
             print "Got to tell you No Hal exits."
             #FIXME Can't Notify...
             #self.shell.notify_custom(2,No_HAL_title,No_HAL_content,crying_icon_img_buf,False)
-            self.notify_interface.Notify('rhythmbox',0,crying_icon_url,No_HAL_title,No_HAL_content,'',{'x-canonical-append':'allowed'},-1)
+            self.notify_interface.Notify('rhythmbox',0,crying_icon_url,
+                                          No_HAL_title,No_HAL_content,
+                                          '',{'x-canonical-append':'allowed'},-1)
           except:
             print "Ah...New Version Rhythmbox"
             self.shell.notify_custom(2,No_HAL_title,No_HAL_content,crying_icon_url,False)
@@ -91,7 +100,9 @@ class EarPhone (rb.Plugin):
         dbus_loop = DBusGMainLoop()
         
         self.system_bus = dbus.SystemBus(mainloop=dbus_loop)
-        self.system_bus.add_signal_receiver(self.EarPhoneChange, dbus_interface = "org.freedesktop.Hal.Device", signal_name = "Condition")
+        self.system_bus.add_signal_receiver(self.EarPhoneChange, 
+                                            dbus_interface = "org.freedesktop.Hal.Device", 
+                                            signal_name = "Condition")
         
     def deactivate(self, shell):
         print "Earphone Event Plugin Deactivating..."
@@ -106,11 +117,14 @@ class EarPhone (rb.Plugin):
          self.builder = gtk.Builder()
          ui_file_url = self.find_file("EarPhone.glade")
          self.builder.add_from_file(ui_file_url)
-         self.builder.set_translation_domain(i18n_mo_name)
+         #self.builder.set_translation_domain(i18n_mo_name)
 
          self.showNotifyObj = self.builder.get_object('showNotify')
          self.showNotifyObj.set_active(self.showNotify)
          self.showNotifyObj.connect('toggled',self.showNotification_changed)
+         
+         self.feedBack = self.builder.get_object('feedback')
+         self.feedBack.set_uri(self.feedBack.get_uri()+'['+version+']')
          
          self.showNotifyDialog = self.builder.get_object("EPDialog")
          self.showNotifyDialog.connect('response',self.notify_response)

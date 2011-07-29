@@ -33,3 +33,9 @@ msgstr "使用气泡通知"
 msgid "Show Notifications if this is Checked"
 msgstr "勾选后将使用气泡通知"
 
+msgid "FeedBack"
+msgstr "反馈"
+
+msgid "Just Tell me anything about this plugin."
+msgstr "欢迎任何关于这个插件的问题和建议"
+
